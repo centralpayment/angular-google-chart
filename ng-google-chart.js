@@ -12,15 +12,16 @@
     angular.module('googlechart', [])
 
         .value('googleChartApiConfig', {
-            version: '1',
+            version: '1.1',
             optionalSettings: {
-                packages: ['corechart']
+                packages: ['corechart','calendar'],
+                language: 'en'
             }
         })
 
         .provider('googleJsapiUrl', function () {
             var protocol = 'https:';
-            var url = '//www.google.com/jsapi';
+            var url = '//www.gstatic.com/charts/loader.js';
 
             this.setProtocol = function(newProtocol) {
                 protocol = newProtocol;
@@ -53,7 +54,8 @@
 
                 settings = angular.extend({}, apiConfig.optionalSettings, settings);
 
-                window.google.load('visualization', apiConfig.version, settings);
+                window.google.charts.load('current', settings );
+                window.google.charts.setOnLoadCallback( settings.callback );
             };
             var head = document.getElementsByTagName('head')[0];
             var script = document.createElement('script');
