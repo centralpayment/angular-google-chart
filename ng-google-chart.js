@@ -426,9 +426,12 @@
 (function(){
     angular.module('googlechart')
         .value('googleChartApiConfig', {
-            version: '1',
+            // version: '1',
+            version: '1.1',
             optionalSettings: {
-                packages: ['corechart']
+                // packages: ['corechart']
+                packages: ['corechart','calendar'],
+                language: 'en'
             }
         });
 })();
@@ -459,7 +462,10 @@
 
             settings = angular.extend({}, apiConfig.optionalSettings, settings);
 
-            window.google.load('visualization', apiConfig.version, settings);
+            // window.google.load('visualization', apiConfig.version, settings);
+            window.google.charts.load('current', settings );
+            window.google.charts.setOnLoadCallback( settings.callback );
+
         };
         var head = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
@@ -799,11 +805,12 @@
 (function(){
     angular.module('googlechart')
         .provider('googleJsapiUrl', googleJsapiUrlProvider);
-        
+
     function googleJsapiUrlProvider() {
         var protocol = 'https:';
-        var url = '//www.google.com/jsapi';
-        
+        // var url = '//www.google.com/jsapi';
+        var url = '//www.gstatic.com/charts/loader.js'; // changing to new location since v0.1
+
         this.setProtocol = function (newProtocol) {
             protocol = newProtocol;
         };
