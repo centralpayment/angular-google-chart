@@ -810,8 +810,6 @@
         var url = '//www.gstatic.com/charts/loader.js';
         // changed Google Charts API retrieval API to new gstatic.com location. added 'calendar' package to load settings.
 
-    })
-
         this.setProtocol = function (newProtocol) {
             protocol = newProtocol;
         };
